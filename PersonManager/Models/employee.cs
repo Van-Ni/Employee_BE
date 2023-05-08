@@ -14,6 +14,16 @@ namespace PersonManager.Models
     
     public partial class employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public employee()
+        {
+            this.attendances = new HashSet<attendance>();
+            this.employee_salary = new HashSet<employee_salary>();
+            this.leaves = new HashSet<leaf>();
+            this.rewardDisciplines = new HashSet<rewardDiscipline>();
+            this.salarys = new HashSet<salary>();
+        }
+    
         public int id { get; set; }
         public string fullname { get; set; }
         public Nullable<bool> gender { get; set; }
@@ -29,9 +39,19 @@ namespace PersonManager.Models
         public Nullable<int> user_id { get; set; }
         public Nullable<int> contract_Id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<attendance> attendances { get; set; }
         public virtual contract contract { get; set; }
         public virtual department department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<employee_salary> employee_salary { get; set; }
         public virtual position position { get; set; }
         public virtual user user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<leaf> leaves { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rewardDiscipline> rewardDisciplines { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<salary> salarys { get; set; }
     }
 }

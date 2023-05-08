@@ -175,6 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\attendance.cs">
+      <DependentUpon>HRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\contract.cs">
       <DependentUpon>HRM.tt</DependentUpon>
     </Compile>
@@ -182,6 +185,12 @@
       <DependentUpon>HRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\employee.cs">
+      <DependentUpon>HRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\employee_salary.cs">
+      <DependentUpon>HRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\holiday.cs">
       <DependentUpon>HRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRM.Context.cs">
@@ -199,10 +208,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HRM.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\leaf.cs">
+      <DependentUpon>HRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\position.cs">
       <DependentUpon>HRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\rewardDiscipline.cs">
+      <DependentUpon>HRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\role.cs">
+      <DependentUpon>HRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\salary.cs">
       <DependentUpon>HRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
@@ -229,8 +247,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\HRM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HRM.Context.cs</LastGenOutput>
       <DependentUpon>HRM.edmx</DependentUpon>
+      <LastGenOutput>HRM.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\HRM.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -25,11 +25,17 @@ namespace PersonManager.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<attendance> attendances { get; set; }
         public virtual DbSet<contract> contracts { get; set; }
         public virtual DbSet<department> departments { get; set; }
+        public virtual DbSet<employee_salary> employee_salary { get; set; }
         public virtual DbSet<employee> employees { get; set; }
+        public virtual DbSet<holiday> holidays { get; set; }
+        public virtual DbSet<leaf> leaves { get; set; }
         public virtual DbSet<position> positions { get; set; }
+        public virtual DbSet<rewardDiscipline> rewardDisciplines { get; set; }
         public virtual DbSet<role> roles { get; set; }
+        public virtual DbSet<salary> salarys { get; set; }
         public virtual DbSet<user> users { get; set; }
     }
 }
