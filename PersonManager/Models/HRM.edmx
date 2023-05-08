@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="attendances">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="check_in_time" Type="time" Precision="7" />
+          <Property Name="check_out_time" Type="time" Precision="7" />
+          <Property Name="overtime_hours" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="employee_id" Type="int" />
+        </EntityType>
         <EntityType Name="contracts">
           <Key>
             <PropertyRef Name="id" />
@@ -22,6 +34,20 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="100" />
           <Property Name="description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="employee_salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="month" Type="int" />
+          <Property Name="year" Type="int" />
+          <Property Name="totalWorkDays" Type="int" />
+          <Property Name="totalHolidayDays" Type="int" />
+          <Property Name="totalPaidLeaveDays" Type="int" />
+          <Property Name="totalOverTimeHours" Type="int" />
+          <Property Name="totalSalary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="employee_id" Type="int" />
         </EntityType>
         <EntityType Name="employees">
           <Key>
@@ -42,6 +68,25 @@
           <Property Name="user_id" Type="int" />
           <Property Name="contract_Id" Type="int" />
         </EntityType>
+        <EntityType Name="holidays">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="holiday_date" Type="date" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="leaves">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="leave_date" Type="date" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="approved" Type="bit" />
+          <Property Name="holiday_type" Type="varchar" MaxLength="50" />
+          <Property Name="employee_id" Type="int" />
+        </EntityType>
         <EntityType Name="positions">
           <Key>
             <PropertyRef Name="id" />
@@ -50,6 +95,16 @@
           <Property Name="name" Type="varchar" MaxLength="100" />
           <Property Name="description" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="rewardDisciplines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="transaction_date" Type="date" />
+          <Property Name="reward_amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="employee_id" Type="int" />
+        </EntityType>
         <EntityType Name="roles">
           <Key>
             <PropertyRef Name="id" />
@@ -57,6 +112,17 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="100" />
           <Property Name="description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="salarys">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="basicSalary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="allowance" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="coefficient" Type="int" />
+          <Property Name="hourlyRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="employee_id" Type="int" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -67,6 +133,30 @@
           <Property Name="password" Type="nvarchar" MaxLength="100" />
           <Property Name="role_id" Type="int" />
         </EntityType>
+        <Association Name="FK_attendances_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="attendances" Type="Self.attendances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="attendances">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_salary_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="employee_salary" Type="Self.employee_salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_salary">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_employees_contracts">
           <End Role="contracts" Type="Self.contracts" Multiplicity="0..1" />
           <End Role="employees" Type="Self.employees" Multiplicity="*" />
@@ -115,6 +205,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_leaves_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="leaves" Type="Self.leaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="leaves">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rewardDisciplines_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="rewardDisciplines" Type="Self.rewardDisciplines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rewardDisciplines">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salarys_employees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="salarys" Type="Self.salarys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salarys">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_users_roles">
           <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
@@ -128,12 +254,26 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HRMModelStoreContainer">
+          <EntitySet Name="attendances" EntityType="Self.attendances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contracts" EntityType="Self.contracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="departments" EntityType="Self.departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee_salary" EntityType="Self.employee_salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="holidays" EntityType="Self.holidays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leaves" EntityType="Self.leaves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="positions" EntityType="Self.positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rewardDisciplines" EntityType="Self.rewardDisciplines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salarys" EntityType="Self.salarys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_attendances_employees" Association="Self.FK_attendances_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="attendances" EntitySet="attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_salary_employees" Association="Self.FK_employee_salary_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="employee_salary" EntitySet="employee_salary" />
+          </AssociationSet>
           <AssociationSet Name="FK_employees_contracts" Association="Self.FK_employees_contracts">
             <End Role="contracts" EntitySet="contracts" />
             <End Role="employees" EntitySet="employees" />
@@ -150,6 +290,18 @@
             <End Role="users" EntitySet="users" />
             <End Role="employees" EntitySet="employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_leaves_employees" Association="Self.FK_leaves_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="leaves" EntitySet="leaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rewardDisciplines_employees" Association="Self.FK_rewardDisciplines_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="rewardDisciplines" EntitySet="rewardDisciplines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salarys_employees" Association="Self.FK_salarys_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="salarys" EntitySet="salarys" />
+          </AssociationSet>
           <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
             <End Role="roles" EntitySet="roles" />
             <End Role="users" EntitySet="users" />
@@ -160,6 +312,19 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="attendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="check_in_time" Type="Time" Precision="7" />
+          <Property Name="check_out_time" Type="Time" Precision="7" />
+          <Property Name="overtime_hours" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="employee_id" Type="Int32" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_attendances_employees" FromRole="attendances" ToRole="employees" />
+        </EntityType>
         <EntityType Name="contract">
           <Key>
             <PropertyRef Name="id" />
@@ -180,6 +345,21 @@
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="employees" Relationship="Self.FK_employees_departments" FromRole="departments" ToRole="employees" />
         </EntityType>
+        <EntityType Name="employee_salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="totalWorkDays" Type="Int32" />
+          <Property Name="totalHolidayDays" Type="Int32" />
+          <Property Name="totalPaidLeaveDays" Type="Int32" />
+          <Property Name="totalOverTimeHours" Type="Int32" />
+          <Property Name="totalSalary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="employee_id" Type="Int32" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_employee_salary_employees" FromRole="employee_salary" ToRole="employees" />
+        </EntityType>
         <EntityType Name="employee">
           <Key>
             <PropertyRef Name="id" />
@@ -198,10 +378,35 @@
           <Property Name="position_id" Type="Int32" />
           <Property Name="user_id" Type="Int32" />
           <Property Name="contract_Id" Type="Int32" />
+          <NavigationProperty Name="attendances" Relationship="Self.FK_attendances_employees" FromRole="employees" ToRole="attendances" />
           <NavigationProperty Name="contract" Relationship="Self.FK_employees_contracts" FromRole="employees" ToRole="contracts" />
           <NavigationProperty Name="department" Relationship="Self.FK_employees_departments" FromRole="employees" ToRole="departments" />
+          <NavigationProperty Name="employee_salary" Relationship="Self.FK_employee_salary_employees" FromRole="employees" ToRole="employee_salary" />
           <NavigationProperty Name="position" Relationship="Self.FK_employees_positions" FromRole="employees" ToRole="positions" />
           <NavigationProperty Name="user" Relationship="Self.FK_employees_users" FromRole="employees" ToRole="users" />
+          <NavigationProperty Name="leaves" Relationship="Self.FK_leaves_employees" FromRole="employees" ToRole="leaves" />
+          <NavigationProperty Name="rewardDisciplines" Relationship="Self.FK_rewardDisciplines_employees" FromRole="employees" ToRole="rewardDisciplines" />
+          <NavigationProperty Name="salarys" Relationship="Self.FK_salarys_employees" FromRole="employees" ToRole="salarys" />
+        </EntityType>
+        <EntityType Name="holiday">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="holiday_date" Type="DateTime" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="leaf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="leave_date" Type="DateTime" Precision="0" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="approved" Type="Boolean" />
+          <Property Name="holiday_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employee_id" Type="Int32" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_leaves_employees" FromRole="leaves" ToRole="employees" />
         </EntityType>
         <EntityType Name="position">
           <Key>
@@ -212,6 +417,17 @@
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="employees" Relationship="Self.FK_employees_positions" FromRole="positions" ToRole="employees" />
         </EntityType>
+        <EntityType Name="rewardDiscipline">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="transaction_date" Type="DateTime" Precision="0" />
+          <Property Name="reward_amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="employee_id" Type="Int32" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_rewardDisciplines_employees" FromRole="rewardDisciplines" ToRole="employees" />
+        </EntityType>
         <EntityType Name="role">
           <Key>
             <PropertyRef Name="id" />
@@ -220,6 +436,18 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="users" Relationship="Self.FK_users_roles" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="basicSalary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="allowance" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="coefficient" Type="Int32" />
+          <Property Name="hourlyRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="employee_id" Type="Int32" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_salarys_employees" FromRole="salarys" ToRole="employees" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -232,6 +460,18 @@
           <NavigationProperty Name="employees" Relationship="Self.FK_employees_users" FromRole="users" ToRole="employees" />
           <NavigationProperty Name="role" Relationship="Self.FK_users_roles" FromRole="users" ToRole="roles" />
         </EntityType>
+        <Association Name="FK_attendances_employees">
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="attendances" Type="Self.attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="attendances">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_employees_contracts">
           <End Role="contracts" Type="Self.contract" Multiplicity="0..1" />
           <End Role="employees" Type="Self.employee" Multiplicity="*" />
@@ -253,6 +493,18 @@
             </Principal>
             <Dependent Role="employees">
               <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_salary_employees">
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="employee_salary" Type="Self.employee_salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_salary">
+              <PropertyRef Name="employee_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -280,6 +532,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_leaves_employees">
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="leaves" Type="Self.leaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="leaves">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rewardDisciplines_employees">
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="rewardDisciplines" Type="Self.rewardDiscipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rewardDisciplines">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salarys_employees">
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="salarys" Type="Self.salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salarys">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_users_roles">
           <End Role="roles" Type="Self.role" Multiplicity="0..1" />
           <End Role="users" Type="Self.user" Multiplicity="*" />
@@ -293,12 +581,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HRMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="attendances" EntityType="Self.attendance" />
           <EntitySet Name="contracts" EntityType="Self.contract" />
           <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="employee_salary" EntityType="Self.employee_salary" />
           <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="holidays" EntityType="Self.holiday" />
+          <EntitySet Name="leaves" EntityType="Self.leaf" />
           <EntitySet Name="positions" EntityType="Self.position" />
+          <EntitySet Name="rewardDisciplines" EntityType="Self.rewardDiscipline" />
           <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="salarys" EntityType="Self.salary" />
           <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_attendances_employees" Association="Self.FK_attendances_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="attendances" EntitySet="attendances" />
+          </AssociationSet>
           <AssociationSet Name="FK_employees_contracts" Association="Self.FK_employees_contracts">
             <End Role="contracts" EntitySet="contracts" />
             <End Role="employees" EntitySet="employees" />
@@ -307,6 +605,10 @@
             <End Role="departments" EntitySet="departments" />
             <End Role="employees" EntitySet="employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_employee_salary_employees" Association="Self.FK_employee_salary_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="employee_salary" EntitySet="employee_salary" />
+          </AssociationSet>
           <AssociationSet Name="FK_employees_positions" Association="Self.FK_employees_positions">
             <End Role="positions" EntitySet="positions" />
             <End Role="employees" EntitySet="employees" />
@@ -314,6 +616,18 @@
           <AssociationSet Name="FK_employees_users" Association="Self.FK_employees_users">
             <End Role="users" EntitySet="users" />
             <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_leaves_employees" Association="Self.FK_leaves_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="leaves" EntitySet="leaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rewardDisciplines_employees" Association="Self.FK_rewardDisciplines_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="rewardDisciplines" EntitySet="rewardDisciplines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salarys_employees" Association="Self.FK_salarys_employees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="salarys" EntitySet="salarys" />
           </AssociationSet>
           <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
             <End Role="roles" EntitySet="roles" />
@@ -326,6 +640,19 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HRMModelStoreContainer" CdmEntityContainer="HRMEntities">
+          <EntitySetMapping Name="attendances">
+            <EntityTypeMapping TypeName="HRMModel.attendance">
+              <MappingFragment StoreEntitySet="attendances">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="check_in_time" ColumnName="check_in_time" />
+                <ScalarProperty Name="check_out_time" ColumnName="check_out_time" />
+                <ScalarProperty Name="overtime_hours" ColumnName="overtime_hours" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="contracts">
             <EntityTypeMapping TypeName="HRMModel.contract">
               <MappingFragment StoreEntitySet="contracts">
@@ -343,6 +670,21 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee_salary">
+            <EntityTypeMapping TypeName="HRMModel.employee_salary">
+              <MappingFragment StoreEntitySet="employee_salary">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="totalWorkDays" ColumnName="totalWorkDays" />
+                <ScalarProperty Name="totalHolidayDays" ColumnName="totalHolidayDays" />
+                <ScalarProperty Name="totalPaidLeaveDays" ColumnName="totalPaidLeaveDays" />
+                <ScalarProperty Name="totalOverTimeHours" ColumnName="totalOverTimeHours" />
+                <ScalarProperty Name="totalSalary" ColumnName="totalSalary" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -366,6 +708,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="holidays">
+            <EntityTypeMapping TypeName="HRMModel.holiday">
+              <MappingFragment StoreEntitySet="holidays">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="holiday_date" ColumnName="holiday_date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leaves">
+            <EntityTypeMapping TypeName="HRMModel.leaf">
+              <MappingFragment StoreEntitySet="leaves">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="leave_date" ColumnName="leave_date" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="holiday_type" ColumnName="holiday_type" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="positions">
             <EntityTypeMapping TypeName="HRMModel.position">
               <MappingFragment StoreEntitySet="positions">
@@ -375,12 +738,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="rewardDisciplines">
+            <EntityTypeMapping TypeName="HRMModel.rewardDiscipline">
+              <MappingFragment StoreEntitySet="rewardDisciplines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+                <ScalarProperty Name="reward_amount" ColumnName="reward_amount" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="roles">
             <EntityTypeMapping TypeName="HRMModel.role">
               <MappingFragment StoreEntitySet="roles">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salarys">
+            <EntityTypeMapping TypeName="HRMModel.salary">
+              <MappingFragment StoreEntitySet="salarys">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="basicSalary" ColumnName="basicSalary" />
+                <ScalarProperty Name="allowance" ColumnName="allowance" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+                <ScalarProperty Name="hourlyRate" ColumnName="hourlyRate" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
