@@ -11,24 +11,97 @@ namespace PersonManager.Controllers
     public class PositionController : ApiController
     {
         private HRMEntities db = new HRMEntities();
-
-        // GET api/Position
         [HttpGet]
-        public IHttpActionResult GetPositions()
+        [Route("api/Position/GetAllPositions")]
+        public IHttpActionResult GetAllPositions()
         {
-            var positions = db.positions
-                .OrderByDescending(p => p.id)
-                .Select(p => new {
-                    Id = p.id,
-                    Name = p.name,
-                    Description = p.description
+            var positions = db.positions.Select(p => new { id = p.id, name = p.name, description = p.description }).ToList();
+
+            return Ok(positions);
+        }
+
+        [HttpGet]
+        [Route("api/Position/GetPosition/{id}")]
+        public IHttpActionResult GetPosition(int id)
+        {
+            var pos = db.positions.Where(p => p.id == id)
+                .Select(p => new
+                {
+                    id = p.id,
+                    name = p.name,
+                    description = p.description
                 })
-                .ToList();
-            if (positions.Count == 0)
+                .SingleOrDefault();
+            if (pos == null)
             {
                 return NotFound();
             }
-            return Ok(positions);
+
+            return Ok(pos);
         }
+
+        [HttpPost]
+        [Route("api/Position/CreatePosition", Name = "CreatePosition")]
+        public IHttpActionResult CreatePosition(position position)
+        {
+            var existingPosition = db.positions.FirstOrDefault(p => p.name == position.name);
+            if (existingPosition != null)
+            {
+                return BadRequest("Chức vụ này đã tồn tại.");
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.positions.Add(position);
+                    db.SaveChanges();
+                    return Ok(new { id = position.id, name = position.name, description = position.description });
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Position/DeletePosition/{id}")]
+        public IHttpActionResult DeletePosition(int id)
+        {
+            var positionToDelete = db.positions.Find(id);
+            if (positionToDelete == null)
+            {
+                return NotFound();
+            }
+
+            db.positions.Remove(positionToDelete);
+            db.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("api/Position/UpdatePosition/{id}")]
+        public IHttpActionResult UpdatePosition(int id, position position)
+        {
+            var posToUpdate = db.positions.Find(id);
+            if (posToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                posToUpdate.name = position.name;
+                posToUpdate.description = position.description;
+                db.SaveChanges();
+                return Ok(posToUpdate);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+
     }
 }
