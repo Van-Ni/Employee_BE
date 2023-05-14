@@ -1,0 +1,46 @@
+﻿@model PersonManager.Areas.Admin.Models.EmployeeViewModel
+
+@{
+    ViewBag.Title = "GetEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>GetEmployee</h2>
+
+
+
+<h2>Thông tin nhân viên</h2>
+
+<table>
+    <tr>
+        <th>ID:</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Họ và tên:</th>
+        <td>@Model.Fullname</td>
+    </tr>
+    <tr>
+        <th>Giới tính:</th>
+        <td>@(Model.Gender == true ? "Nam" : "Nữ")</td>
+    </tr>
+    <tr>
+        <th>Email:</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Điện thoại:</th>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <th>Địa chỉ:</th>
+        <td>@Model.Address</td>
+    </tr>
+    <tr>
+        <th>Ngày sinh:</th>
+        <td>@Model.Birthday</td>
+    </tr>
+    <tr>
+        </table>
+
+

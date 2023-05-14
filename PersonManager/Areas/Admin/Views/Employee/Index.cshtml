@@ -1,0 +1,42 @@
+﻿@model List<PersonManager.Areas.Admin.Models.EmployeeViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+<table>
+    <tbody>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ tên</th>
+                <th>Giới tính</th>
+                <th>Email</th>
+                <th>Điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Ngày sinh</th>
+                <th>Ngày vào làm</th>
+                <th>Avatar</th>
+                <th>Trạng thái</th>
+                <th>Bộ phận</th>
+                <th>Chức vụ</th>
+                <th>Hợp đồng</th>
+                <th>Người dùng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.Fullname</td>
+                    <td>@emp.Gender</td>
+                    <td>@emp.Email</td>
+                    <td>@emp.Phone</td>
+                    <td>@emp.Address</td>
+                    <td>@emp.Birthday</td>
+                    <td>@emp.JoinDate</td>
+                  </tr>
+            }
+           </tbody>
+</table>

@@ -1,24 +1,25 @@
-﻿using System;
+﻿using PersonManager.Areas.Admin.Models;
+using PersonManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using PersonManager.Models;
+using System.Web;
+using System.Web.Mvc;
 
-namespace PersonManager.Controllers
+namespace PersonManager.Areas.Admin.Controllers
 {
-    public class EmployeeController : ApiController
+    public class EmployeeController : Controller
     {
+        // GET: Admin/Employee
         private HRMEntities db = new HRMEntities();
-        [HttpGet]
-        public IHttpActionResult GetEmployees()
+        public ActionResult Index()
         {
             var employees = db.employees
                 .Include("user")
                 .Include("department")
                 .OrderByDescending(e => e.id)
-                .Select(e => new {
+                .Select(e => new EmployeeViewModel
+                {
                     Id = e.id,
                     Fullname = e.fullname,
                     Gender = e.gender,
@@ -36,21 +37,17 @@ namespace PersonManager.Controllers
                     ContractId = e.contract_Id,
                     ContractName = e.contract != null ? e.contract.type : null,
                     UserId = e.user_id,
-                    UserName= e.user != null ? e.user.username : null
+                    UserName = e.user != null ? e.user.username : null
                 })
                 .ToList();
-            if (employees.Count == 0)
-            {
-                return NotFound();
-            }
-            return Ok(employees);
+          // return Json(employees, JsonRequestBehavior.AllowGet);
+           return View(employees);
         }
-        [HttpGet]
-        [Route("api/Employee/GetEmployee/{id}")]
-        public IHttpActionResult GetEmployee(int id)
+        public ActionResult GetEmployee(int id)
         {
+           // return Json(id, JsonRequestBehavior.AllowGet);
             var emp = db.employees.Where(e => e.id == id)
-                .Select(e => new
+                .Select(e => new EmployeeViewModel
                 {
                     Id = e.id,
                     Fullname = e.fullname,
@@ -72,36 +69,36 @@ namespace PersonManager.Controllers
                     UserName = e.user != null ? e.user.username : null
                 })
                 .SingleOrDefault();
+
             if (emp == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(emp);
+            return View(emp);
         }
-        // POST api/employees
+
         [HttpPost]
-        public IHttpActionResult CreateEmployee(employee employee)
+        public ActionResult CreateEmployee(employee employee)
         {
             if (ModelState.IsValid)
             {
                 db.employees.Add(employee);
                 db.SaveChanges();
-                return CreatedAtRoute("DefaultApi", new { id = employee.id }, employee);
+               // return Json("ok");
+                return RedirectToAction("Index"); // chuyển đến controller Index()
             }
             else
             {
-                return BadRequest(ModelState);
+                return View(employee); // nếu có lỗi chuyển lại trang Create
             }
         }
-        [HttpPut]
-        [Route("api/Employee/UpdateEmployee/{id}")]
-        public IHttpActionResult UpdateRole(int id, employee employee)
+        [HttpPost]
+        public ActionResult UpdateEmployee(int id, employee employee)
         {
             var empToUpdate = db.employees.Find(id);
             if (empToUpdate == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
 
             if (ModelState.IsValid)
@@ -118,27 +115,28 @@ namespace PersonManager.Controllers
                 empToUpdate.position_id = employee.position_id;
                 empToUpdate.contract_Id = employee.contract_Id;
                 db.SaveChanges();
-                return Ok(empToUpdate);
+                //return Json("ok");
+                return RedirectToAction("Index"); 
+
             }
             else
             {
-                return BadRequest(ModelState);
+                return View(employee);
             }
         }
-        // DELETE api/roles/{id}
-        [HttpDelete]
-        [Route("api/Employee/DeleteEmployee/{id}")]
-        public IHttpActionResult DeleteEmployee(int id)
+        [HttpPost]
+        public ActionResult DeleteEmployee(int id)
         {
             var empToDelete = db.employees.Find(id);
             if (empToDelete == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
 
             db.employees.Remove(empToDelete);
             db.SaveChanges();
-            return Ok();
+            return RedirectToAction("Index");
         }
+
     }
 }
