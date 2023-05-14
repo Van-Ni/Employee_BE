@@ -93,7 +93,7 @@ namespace PersonManager.Controllers
         // DELETE api/roles/{id}
         [HttpDelete]
         [Route("api/Role/DeleteRole/{id}")]
-        public IHttpActionResult DeleteRole(int id)
+        public IHttpActionResult Delete(int id)
         {
             var roleToDelete = db.roles.Find(id);
             if (roleToDelete == null)
