@@ -96,7 +96,7 @@ namespace PersonManager.Controllers
         }
         [HttpPut]
         [Route("api/Employee/UpdateEmployee/{id}")]
-        public IHttpActionResult UpdateRole(int id, employee employee)
+        public IHttpActionResult UpdateEmployee(int id, employee employee)
         {
             var empToUpdate = db.employees.Find(id);
             if (empToUpdate == null)

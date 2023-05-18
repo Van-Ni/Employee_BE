@@ -18,7 +18,7 @@ namespace PersonManager.Models
         public Nullable<System.DateTime> leave_date { get; set; }
         public string reason { get; set; }
         public Nullable<bool> approved { get; set; }
-        public string holiday_type { get; set; }
+        public string leave_type { get; set; }
         public Nullable<int> employee_id { get; set; }
     
         public virtual employee employee { get; set; }
