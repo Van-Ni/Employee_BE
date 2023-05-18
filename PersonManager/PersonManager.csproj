@@ -171,6 +171,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -285,13 +286,6 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <EntityDeploy Include="Models\HRM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HRM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\HRM.edmx.diagram">
-      <DependentUpon>HRM.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Employee\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\GetEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
@@ -301,6 +295,13 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <EntityDeploy Include="Models\HRM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HRM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\HRM.edmx.diagram">
+      <DependentUpon>HRM.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date" Type="date" />
           <Property Name="check_in_time" Type="time" Precision="7" />
           <Property Name="check_out_time" Type="time" Precision="7" />
@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="month" Type="int" />
           <Property Name="year" Type="int" />
           <Property Name="totalWorkDays" Type="int" />
@@ -72,7 +72,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="holiday_date" Type="date" />
           <Property Name="description" Type="nvarchar" MaxLength="500" />
         </EntityType>
@@ -80,11 +80,11 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="leave_date" Type="date" />
           <Property Name="reason" Type="nvarchar" MaxLength="500" />
           <Property Name="approved" Type="bit" />
-          <Property Name="holiday_type" Type="varchar" MaxLength="50" />
+          <Property Name="leave_type" Type="varchar" MaxLength="50" />
           <Property Name="employee_id" Type="int" />
         </EntityType>
         <EntityType Name="positions">
@@ -99,7 +99,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="transaction_date" Type="date" />
           <Property Name="reward_amount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="reason" Type="nvarchar" MaxLength="500" />
@@ -117,7 +117,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="basicSalary" Type="decimal" Precision="18" Scale="0" />
           <Property Name="allowance" Type="decimal" Precision="18" Scale="0" />
           <Property Name="coefficient" Type="int" />
@@ -316,7 +316,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="check_in_time" Type="Time" Precision="7" />
           <Property Name="check_out_time" Type="Time" Precision="7" />
@@ -349,7 +349,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="month" Type="Int32" />
           <Property Name="year" Type="Int32" />
           <Property Name="totalWorkDays" Type="Int32" />
@@ -392,7 +392,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="holiday_date" Type="DateTime" Precision="0" />
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -400,11 +400,11 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="leave_date" Type="DateTime" Precision="0" />
           <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="approved" Type="Boolean" />
-          <Property Name="holiday_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="leave_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="employee_id" Type="Int32" />
           <NavigationProperty Name="employee" Relationship="Self.FK_leaves_employees" FromRole="leaves" ToRole="employees" />
         </EntityType>
@@ -421,7 +421,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="transaction_date" Type="DateTime" Precision="0" />
           <Property Name="reward_amount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -441,7 +441,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="basicSalary" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="allowance" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="coefficient" Type="Int32" />
@@ -724,7 +724,7 @@
                 <ScalarProperty Name="leave_date" ColumnName="leave_date" />
                 <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="approved" ColumnName="approved" />
-                <ScalarProperty Name="holiday_type" ColumnName="holiday_type" />
+                <ScalarProperty Name="leave_type" ColumnName="leave_type" />
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
               </MappingFragment>
             </EntityTypeMapping>
