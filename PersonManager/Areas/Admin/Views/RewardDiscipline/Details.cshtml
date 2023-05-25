@@ -1,0 +1,51 @@
+﻿@model PersonManager.Areas.Admin.Models.RewardDisciplineViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reward & Discipline</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ngày
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction_date)
+        </dd>
+
+        <dt>
+           Số tiền (Thưởng hoặc Phạt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reward_amount)
+        </dd>
+
+        <dt>
+            Nguyên nhân
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+
+        <dt>
+            Mã nhân viên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
