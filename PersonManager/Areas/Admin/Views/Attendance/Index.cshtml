@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PersonManager.Areas.Admin.Models.AttendanceViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>Attendances</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã nhân viên
+        </th>
+        <th>
+            Ngày
+        </th>
+        <th>
+            Thời gian vào
+        </th>
+        <th>
+            Thời gian ra
+        </th>
+        <th>
+            Giờ làm thêm
+        </th>
+        <th>
+            Trạng thái
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Check_in_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Check_out_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Overtime_hours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+    </tr>
+}
+
+</table>
