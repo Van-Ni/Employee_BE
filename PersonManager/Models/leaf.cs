@@ -9,6 +9,7 @@
 
 namespace PersonManager.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,7 +21,8 @@ namespace PersonManager.Models
         public Nullable<bool> approved { get; set; }
         public string leave_type { get; set; }
         public Nullable<int> employee_id { get; set; }
-    
+        [JsonIgnore]    
+        
         public virtual employee employee { get; set; }
     }
 }
