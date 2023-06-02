@@ -1,0 +1,59 @@
+﻿@model PersonManager.Areas.Admin.Models.LeaveViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Leave</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ngày nghỉ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Leave_date)
+        </dd>
+
+        <dt>
+            Nguyên nhân
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+
+        <dt>
+            Chấp thuận
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+
+        <dt>
+            Loại nghỉ phép
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Leave_type)
+        </dd>
+
+        <dt>
+            Mã nhân viên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,4 +1,4 @@
-﻿@model PersonManager.Areas.Admin.Models.ContractViewModel
+﻿@model PersonManager.Areas.Admin.Models.RewardDisciplineViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,39 +8,39 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Contract</h4>
+    <h4>Reward & Discipline</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Loại hợp đồng
+            Ngày
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.Transaction_date)
         </dd>
 
         <dt>
-            Ngày bắt đầu
+           Số tiền (Thưởng hoặc Phạt)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.Reward_amount)
         </dd>
 
         <dt>
-            Ngày kết thúc
+            Nguyên nhân
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+            @Html.DisplayFor(model => model.Reason)
         </dd>
 
         <dt>
-            Ghi chú
+            Mã nhân viên
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Note)
+            @Html.DisplayFor(model => model.Employee_id)
         </dd>
 
     </dl>
