@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PersonManager.Areas.Admin.Models.SalaryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>Salary</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Lương cơ bản
+        </th>
+        <th>
+            Phụ cấp
+        </th>
+        <th>
+            Hệ số
+        </th>
+        <th>
+            Tiền công theo giờ
+        </th>
+        <th>
+            Mã nhân viên
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasicSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allowance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coefficient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HourlyRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
