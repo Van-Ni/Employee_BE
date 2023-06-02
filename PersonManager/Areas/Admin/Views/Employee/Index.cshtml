@@ -4,39 +4,74 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Danh sách nhân viên
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ tên</th>
+                        <th>Giới tính</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày sinh</th>
+                        <th>Ngày vào làm</th>
+                        <th>Avatar</th>
+                        <th>Trạng thái</th>
+                        <th>Bộ phận</th>
+                        <th>Chức vụ</th>
+                        <th>Hợp đồng</th>
+                        <th>Người dùng</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ tên</th>
+                        <th>Giới tính</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày sinh</th>
+                        <th>Ngày vào làm</th>
+                        <th>Avatar</th>
+                        <th>Trạng thái</th>
+                        <th>Bộ phận</th>
+                        <th>Chức vụ</th>
+                        <th>Hợp đồng</th>
+                        <th>Người dùng</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var emp in Model)
+                    {
+                    <tr>
+                        <td>@emp.Id</td>
+                        <td>@emp.Fullname</td>
+                        <td>@emp.Gender</td>
+                        <td>@emp.Email</td>
+                        <td>@emp.Phone</td>
+                        <td>@emp.Address</td>
+                        <td>@emp.Birthday</td>
+                        <td>@emp.JoinDate</td>
+                        <td>@emp.Avatar</td>
+                        <td>@emp.Status</td>
+                        <td>@emp.DepartmentName</td>
+                        <td>@emp.PositionName</td>
+                        <td>@emp.ContractName</td>
+                        <td>@emp.UserName</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<table>
-    <tbody>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Họ tên</th>
-                <th>Giới tính</th>
-                <th>Email</th>
-                <th>Điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Ngày sinh</th>
-                <th>Ngày vào làm</th>
-                <th>Avatar</th>
-                <th>Trạng thái</th>
-                <th>Bộ phận</th>
-                <th>Chức vụ</th>
-                <th>Hợp đồng</th>
-                <th>Người dùng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var emp in Model)
-            {
-                <tr>
-                    <td>@emp.Fullname</td>
-                    <td>@emp.Gender</td>
-                    <td>@emp.Email</td>
-                    <td>@emp.Phone</td>
-                    <td>@emp.Address</td>
-                    <td>@emp.Birthday</td>
-                    <td>@emp.JoinDate</td>
-                  </tr>
-            }
-           </tbody>
-</table>
+
+
+
