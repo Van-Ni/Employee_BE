@@ -77,14 +77,17 @@ namespace PersonManager.Areas.Admin.Controllers
             return View(emp);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
-        public ActionResult CreateEmployee(employee employee)
+        public ActionResult Create(employee employee)
         {
             if (ModelState.IsValid)
             {
                 db.employees.Add(employee);
                 db.SaveChanges();
-               // return Json("ok");
                 return RedirectToAction("Index"); // chuyển đến controller Index()
             }
             else
