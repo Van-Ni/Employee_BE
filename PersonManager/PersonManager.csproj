@@ -151,6 +151,7 @@
     <Compile Include="Areas\Admin\Models\Contract.cs" />
     <Compile Include="Areas\Admin\Models\Department.cs" />
     <Compile Include="Areas\Admin\Models\Employee.cs" />
+    <Compile Include="Areas\Admin\Models\EmpSalary.cs" />
     <Compile Include="Areas\Admin\Models\Holiday.cs" />
     <Compile Include="Areas\Admin\Models\Leave.cs" />
     <Compile Include="Areas\Admin\Models\Position.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmpSalaryController.cs" />
     <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
@@ -360,6 +362,7 @@
     <Content Include="Areas\Admin\Views\Salary\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
