@@ -95,8 +95,34 @@ namespace PersonManager.Areas.Admin.Controllers
                 return View(employee); // nếu có lỗi chuyển lại trang Create
             }
         }
+        public ActionResult Edit(int id)
+        {
+            var employee = db.employees.Find(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            var employeeViewModel = new EmployeeViewModel
+            {
+                Id = employee.id,
+                Fullname = employee.fullname,
+                Gender = employee.gender,
+                Email = employee.email,
+                Phone = employee.phone,
+                Address = employee.address,
+                Birthday = employee.birthday,
+                JoinDate = employee.joindate,
+                Status = employee.status,
+                DepartmentId = employee.department_id,
+                PositionId = employee.position_id,
+                ContractId = employee.contract_Id
+            };
+
+            return View(employeeViewModel);
+        }
         [HttpPost]
-        public ActionResult UpdateEmployee(int id, employee employee)
+        public ActionResult Edit(int id, employee employee)
         {
             var empToUpdate = db.employees.Find(id);
             if (empToUpdate == null)
@@ -118,7 +144,7 @@ namespace PersonManager.Areas.Admin.Controllers
                 empToUpdate.position_id = employee.position_id;
                 empToUpdate.contract_Id = employee.contract_Id;
                 db.SaveChanges();
-                //return Json("ok");
+                
                 return RedirectToAction("Index"); 
 
             }
@@ -127,7 +153,6 @@ namespace PersonManager.Areas.Admin.Controllers
                 return View(employee);
             }
         }
-        [HttpPost]
         public ActionResult DeleteEmployee(int id)
         {
             var empToDelete = db.employees.Find(id);

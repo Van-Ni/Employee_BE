@@ -17,5 +17,6 @@ namespace PersonManager.Models
         public int id { get; set; }
         public Nullable<System.DateTime> holiday_date { get; set; }
         public string description { get; set; }
+        public Nullable<int> days_off { get; set; }
     }
 }
