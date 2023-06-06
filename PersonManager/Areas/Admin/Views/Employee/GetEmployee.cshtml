@@ -5,42 +5,110 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>GetEmployee</h2>
+<div class="card mb-4">
+    <div class="card-body" style="background-color: var(--bs-card-cap-bg)">Thông tin chi tiết</div>
+    <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #fff">
+        <dl class="dl-horizontal">
+
+            <dt>
+                Mã nhân viên
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+
+            <dt>
+                Họ và tên
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Fullname)
+            </dd>
+
+            <dt>
+                Giới tính
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                Số điện thoại
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            <dt>
+                Địa chỉ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                Ngày sinh
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Birthday)
+            </dd>
+
+            <dt>
+                Ngày vào công ty
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.JoinDate)
+            </dd>
+
+            <dt>
+                Trạng thái
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                Mã bộ phận
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DepartmentId)
+            </dd>
+
+            <dt>
+                Mã chức vụ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PositionId)
+            </dd>
+
+            <dt>
+                Mã người dùng
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+
+            <dt>
+                Mã hợp đồng
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ContractId)
+            </dd>
 
 
+        </dl>
+    </div>
+</div>
 
-<h2>Thông tin nhân viên</h2>
-
-<table>
-    <tr>
-        <th>ID:</th>
-        <td>@Model.Id</td>
-    </tr>
-    <tr>
-        <th>Họ và tên:</th>
-        <td>@Model.Fullname</td>
-    </tr>
-    <tr>
-        <th>Giới tính:</th>
-        <td>@(Model.Gender == true ? "Nam" : "Nữ")</td>
-    </tr>
-    <tr>
-        <th>Email:</th>
-        <td>@Model.Email</td>
-    </tr>
-    <tr>
-        <th>Điện thoại:</th>
-        <td>@Model.Phone</td>
-    </tr>
-    <tr>
-        <th>Địa chỉ:</th>
-        <td>@Model.Address</td>
-    </tr>
-    <tr>
-        <th>Ngày sinh:</th>
-        <td>@Model.Birthday</td>
-    </tr>
-    <tr>
-        </table>
-
-
+<p>
+    <div class="row">
+        @Html.ActionLink("<Quay lại", "Index", null, new { @style = "color: #fff; width: 100px; margin: 0 14px;", @class = "btn btn-primary" })
+        @Html.ActionLink("Cập nhật", "Edit", null, new { id = Model.Id }, new { id = Model.Id, @style = "color: #fff; width: 100px", @class = "btn btn-primary" })
+    </div>
+</p>

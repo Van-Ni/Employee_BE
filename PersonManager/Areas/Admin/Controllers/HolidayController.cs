@@ -23,7 +23,8 @@ namespace PersonManager.Areas.Admin.Controllers
          {
              Id = e.id,
              Holiday_date = e.holiday_date,
-             Description = e.description
+             Description = e.description,
+             Days_off = e.days_off
          })
          .ToList();
             return View(holidays);
@@ -38,7 +39,8 @@ namespace PersonManager.Areas.Admin.Controllers
                 {
                     Id = e.id,
                     Holiday_date = e.holiday_date,
-                    Description = e.description
+                    Description = e.description,
+                    Days_off = e.days_off,
                 })
                 .SingleOrDefault();
 
@@ -87,7 +89,8 @@ namespace PersonManager.Areas.Admin.Controllers
             {
                 Id = holiday.id,
                 Holiday_date = holiday.holiday_date,
-                Description = holiday.description
+                Description = holiday.description,
+                Days_off = holiday.days_off,
             };
 
             return View(holidayViewModel);
@@ -110,6 +113,7 @@ namespace PersonManager.Areas.Admin.Controllers
             {
                 holidayToUpdate.holiday_date = holiday.holiday_date;
                 holidayToUpdate.description = holiday.description;
+                holidayToUpdate.days_off = holiday.days_off;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
