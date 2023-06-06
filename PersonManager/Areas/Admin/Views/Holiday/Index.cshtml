@@ -5,36 +5,53 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Holiday</h2>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Danh sách ngày nghỉ
+    </div>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @style = "color: #fff; width: 100px; margin: 16px", @class = "btn btn-primary" })
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Ngày nghỉ
-        </th>
-        <th>
-            Mô tả
-        </th>
-        <th></th>
-    </tr>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Ngày nghỉ</th>
+                    <th>Mô tả</th>
+                    <th>Số ngày nghỉ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Ngày nghỉ</th>
+                    <th>Mô tả</th>
+                    <th>Số ngày nghỉ</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Holiday_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Days_off)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Holiday_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

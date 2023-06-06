@@ -5,15 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
         Danh sách vai trò
     </div>
-    <button type="button" class="btn btn-primary" style=" width: 100px; margin: 16px;">
-        @Html.ActionLink("Tạo mới", "Create", null, new { @style="color: #fff;" })
-    </button>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @style = "color: #fff; width: 100px; margin: 16px", @class = "btn btn-primary" })
     <div class="card-body">
         <table id="datatablesSimple">
             <thead>
@@ -42,7 +39,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Chi tiết", "GetRole", new { id = item.Id }) |
                             @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
                         </td>
                     </tr>

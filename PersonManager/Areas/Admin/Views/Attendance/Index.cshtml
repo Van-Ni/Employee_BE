@@ -5,53 +5,86 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Attendances</h2>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Danh sách chấm công
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>
+                        Ngày
+                    </th>
+                    <th>
+                        Mã nhân viên
+                    </th>
 
-<p>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Mã nhân viên
-        </th>
-        <th>
-            Ngày
-        </th>
-        <th>
-            Thời gian vào
-        </th>
-        <th>
-            Thời gian ra
-        </th>
-        <th>
-            Giờ làm thêm
-        </th>
-        <th>
-            Trạng thái
-        </th>
-    </tr>
+                    <th>
+                        Thời gian vào
+                    </th>
+                    <th>
+                        Thời gian ra
+                    </th>
+                    <th>
+                        Giờ làm thêm
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        Ngày
+                    </th>
+                    <th>
+                        Mã nhân viên
+                    </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Check_in_time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Check_out_time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Overtime_hours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-    </tr>
-}
+                    <th>
+                        Thời gian vào
+                    </th>
+                    <th>
+                        Thời gian ra
+                    </th>
+                    <th>
+                        Giờ làm thêm
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
 
-</table>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Check_in_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Check_out_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Overtime_hours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

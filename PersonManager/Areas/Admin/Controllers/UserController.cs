@@ -17,7 +17,7 @@ namespace PersonManager.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var users = db.users.Select(u => new UserViewModel { Id = u.id, Username = u.username, Password = u.password, RoleId = (int)u.role_id }).ToList();
+            var users = db.users.Select(u => new UserViewModel { Id = u.id, Username = u.username, Password = u.password, RoleId = u.role_id }).ToList();
 
             return View(users);
         }
