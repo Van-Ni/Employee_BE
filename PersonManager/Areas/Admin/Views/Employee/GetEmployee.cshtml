@@ -69,36 +69,41 @@
             <dt>
                 Trạng thái
             </dt>
+            
+            @if (Model.Status == true)
+            {
+                <dd>Còn làm</dd>
+            } else
+            {
+                <dd>Nghỉ việc</dd>
+            }
+
+            <dt>
+                Bộ phận
+            </dt>
             <dd>
-                @Html.DisplayFor(model => model.Status)
+                @Html.DisplayFor(model => model.DepartmentName)
             </dd>
 
             <dt>
-                Mã bộ phận
+                Chức vụ
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.DepartmentId)
+                @Html.DisplayFor(model => model.PositionName)
             </dd>
 
             <dt>
-                Mã chức vụ
+                Tài khoản
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.PositionId)
+                @Html.DisplayFor(model => model.UserName)
             </dd>
 
             <dt>
-                Mã người dùng
+                Hợp đồng
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.UserId)
-            </dd>
-
-            <dt>
-                Mã hợp đồng
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ContractId)
+                @Html.DisplayFor(model => model.ContractName)
             </dd>
 
 

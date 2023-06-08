@@ -20,7 +20,7 @@
                     <th>Bộ phận</th>
                     <th>Chức vụ</th>
                     <th>Hợp đồng</th>
-                    <th>Người dùng</th>
+                    <th>Tài khoản</th>
                     <th>Trạng thái</th>
                     <th></th>
                 </tr>
@@ -33,7 +33,7 @@
                     <th>Bộ phận</th>
                     <th>Chức vụ</th>
                     <th>Hợp đồng</th>
-                    <th>Người dùng</th>
+                    <th>Tài khoản</th>
                     <th>Trạng thái</th>
                     <th></th>
                 </tr>
@@ -49,11 +49,17 @@
                     <td>@emp.PositionName</td>
                     <td>@emp.ContractName</td>
                     <td>@emp.UserName</td>
-                    <td>@emp.Status</td>
+                    @if (@emp.Status == true) {
+                         <td>Còn làm</td>
+                    } else
+                    {
+                        <td>Nghỉ việc</td>
+                    }
                     <td>
                         @Html.ActionLink("Cập nhật", "Edit", new { id = emp.Id }) |
                         @Html.ActionLink("Chi tiết", "GetEmployee", new { id = emp.Id }) |
-                        @Html.ActionLink("Xóa", "Delete", new { id = emp.Id })
+                        @Html.ActionLink("Xóa", "DeleteEmployee", new { id = emp.Id }) |
+                        @Html.ActionLink("Thêm tài khoản", "Create","User", new {id = emp.Id}, null)
                     </td>
                 </tr>
                 }

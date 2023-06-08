@@ -5,73 +5,46 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-    <div class="form-horizontal">
-        <h4>UserViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="employee_id">Employee Name</label>
-            <input type="text" class="form-control" id="employee_id" value="@ViewBag.EmployeeName" readonly>
-        </div>
-        <div class="form-group">
-            <label for="role_id">Role</label>
-            <select id="role_id" name="RoleId">
-                @foreach (var role in ViewBag.Roles)
-                {
-                    <option value="@role.Value">@role.Text</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="department_id">Department</label>
-            <select id="department_id" name="DepartmentId">
-                @foreach (var department in ViewBag.Departments)
-                {
-                    <option value="@department.Value">@department.Text</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="position_id">Position</label>
-            <select id="position_id" name="PositionId">
-                @foreach (var position in ViewBag.Positions)
-                {
-                    <option value="@position.Value">@position.Text</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Thêm tài khoản</h3></div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="employee_id">Tên nhân viên</label>
+                                <input type="text" class="form-control" id="employee_id" value="@ViewBag.EmployeeName" disabled>
+                            </div>
+                            <div class="form-floating mb-3">
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền tên người dùng" } })
+                                <label for="Username">Tên tài khoản</label>
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-floating mb-3">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mật khẩu" } })
+                                <label for="Password">Mật khẩu</label>
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Xác nhận"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="row">
+    @Html.ActionLink("<Quay lại", "Index", "Employee", null, new { @style = "color: #fff; width: 100px; margin: 0 14px;", @class = "btn btn-primary" })
+    @Html.ActionLink("Tài khoản", "Index", null, new { @style = "color: #fff; width: 100px", @class = "btn btn-primary" })
 </div>
-
