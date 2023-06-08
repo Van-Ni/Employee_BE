@@ -80,7 +80,24 @@
                                 <label for="contract_Id">Mã hợp đồng</label>
                                 @Html.ValidationMessageFor(model => model.contract_Id, "", new { @class = "text-danger" })
                             </div>
-
+                            <div class="form-group">
+                                <label for="department_id">Department</label>
+                                <select id="department_id" name="DepartmentId">
+                                    @foreach (var department in ViewBag.Departments)
+                                    {
+                                        <option value="@department.Value">@department.Text</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="position_id">Position</label>
+                                <select id="position_id" name="PositionId">
+                                    @foreach (var position in ViewBag.Positions)
+                                    {
+                                        <option value="@position.Value">@position.Text</option>
+                                    }
+                                </select>
+                            </div>
                             <div class="mt-4 mb-0">
                                 <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Xác nhận"></div>
                             </div>
