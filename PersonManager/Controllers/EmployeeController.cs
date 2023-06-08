@@ -118,7 +118,7 @@ namespace PersonManager.Controllers
                 empToUpdate.position_id = employee.position_id;
                 empToUpdate.contract_Id = employee.contract_Id;
                 db.SaveChanges();
-                return Ok(empToUpdate);
+                return Ok();
             }
             else
             {
