@@ -40,7 +40,16 @@ namespace PersonManager.Areas.Admin.Controllers
                 Value = r.id.ToString(),
                 Text = r.name
             }).ToList();
-
+            ViewBag.Departments = db.departments.Select(d => new SelectListItem
+            {
+                Value = d.id.ToString(),
+                Text = d.name
+            }).ToList();
+            ViewBag.Positions = db.positions.Select(p => new SelectListItem
+            {
+                Value = p.id.ToString(),
+                Text = p.name
+            }).ToList();
             return View();
         }
         [HttpPost]
