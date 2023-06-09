@@ -58,29 +58,38 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Leave_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    @if (@item.Approved == true)
+                    {
                         <td>
-                            @Html.DisplayFor(modelItem => item.Employee_id)
+                            Có
                         </td>
+                    }
+                    else
+                    {
                         <td>
-                            @Html.DisplayFor(modelItem => item.Leave_date)
+                            Không
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Reason)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Approved)
-                        </td>
-                        <td>
-                            @item.Leave_type
-                        </td>
+                    }
+                    <td>
+                        @item.Leave_type
+                    </td>
 
-                        <td>
-                            @Html.ActionLink("Cập nhật", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
+                    <td>
+                        @Html.ActionLink("Cập nhật", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

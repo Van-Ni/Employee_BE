@@ -35,8 +35,18 @@
                             </div>
                             <div class="mb-3">
                                 <label for="Approved">Chấp thuận</label>
-                                @Html.EditorFor(model => model.Approved)
-                                @Html.ValidationMessageFor(model => model.Approved, "", new { @class = "text-danger" })
+                                <select id="Approved" name="approved" class="form-control">
+                                    @if (Model.Approved == true)
+                                    {
+                                        <option value="true" selected>Có</option>
+                                        <option value="false">Không</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="true">Có</option>
+                                        <option value="false" selected>Không</option>
+                                    }
+                                </select>
                             </div>
                             <div class="form-floating mb-3">
                                 @Html.EditorFor(model => model.Leave_type, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền loại nghỉ phép" } })

@@ -89,7 +89,13 @@ namespace PersonManager.Areas.Admin.Controllers
                 Value = p.id.ToString(),
                 Text = p.name
             }).ToList();
+            ViewBag.Contracts = db.contracts.Select(c => new SelectListItem
+            {
+                Value = c.id.ToString(),
+                Text = c.type
+            }).ToList();
             return View();
+
         }
         [HttpPost]
         public ActionResult Create(employee employee)
@@ -105,6 +111,8 @@ namespace PersonManager.Areas.Admin.Controllers
                 return View(employee); // nếu có lỗi chuyển lại trang Create
             }
         }
+
+        
         public ActionResult Edit(int id)
         {
             var employee = db.employees.Find(id);
@@ -128,6 +136,22 @@ namespace PersonManager.Areas.Admin.Controllers
                 PositionId = employee.position_id,
                 ContractId = employee.contract_Id
             };
+
+            ViewBag.Departments = db.departments.Select(d => new SelectListItem
+            {
+                Value = d.id.ToString(),
+                Text = d.name
+            }).ToList();
+            ViewBag.Positions = db.positions.Select(p => new SelectListItem
+            {
+                Value = p.id.ToString(),
+                Text = p.name
+            }).ToList();
+            ViewBag.Contracts = db.contracts.Select(c => new SelectListItem
+            {
+                Value = c.id.ToString(),
+                Text = c.type
+            }).ToList();
 
             return View(employeeViewModel);
         }

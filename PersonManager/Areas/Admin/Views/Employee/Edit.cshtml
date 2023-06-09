@@ -53,28 +53,45 @@
                             </div>
                             <div class="mb-3">
                                 <label for="status">Trạng thái</label>
-                                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                <label for="status">Trạng thái</label>
+                                <select id="status" name="Status" class="form-control">
+                                    @if (Model.Status == true)
+                                    {
+                                        <option value="true" selected>Còn Làm</option>
+                                        <option value="false">Nghỉ việc</option>
+                                    } else
+                                    {
+                                        <option value="true">Còn Làm</option>
+                                        <option value="false" selected>Nghỉ việc</option>
+                                    }
+                                </select>
                             </div>
-                            <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.DepartmentId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã bộ phận" } })
-                                <label for="department_id">Mã bộ phận</label>
-                                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                            <div class="mb-3">
+                                <label for="department_id">Bộ phận</label>
+                                <select id="department_id" name="DepartmentId" class="form-control">
+                                    @foreach (var department in ViewBag.Departments)
+                                    {
+                                        <option value="@department.Value">@department.Text</option>
+                                    }
+                                </select>
                             </div>
-                            <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.PositionId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã chức vụ" } })
-                                <label for="position_id">Mã chức vụ</label>
-                                @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+                            <div class="mb-3">
+                                <label for="position_id">Chức vụ</label>
+                                <select id="position_id" name="PositionId" class="form-control">
+                                    @foreach (var position in ViewBag.Positions)
+                                    {
+                                        <option value="@position.Value">@position.Text</option>
+                                    }
+                                </select>
                             </div>
-                            <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã người dùng" } })
-                                <label for="user_id">Mã người dùng</label>
-                                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.ContractId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã hợp đồng" } })
-                                <label for="contract_Id">Mã hợp đồng</label>
-                                @Html.ValidationMessageFor(model => model.ContractId, "", new { @class = "text-danger" })
+                            <div class="mb-3">
+                                <label for="contract_id">Hợp đồng</label>
+                                <select id="contract_id" name="ContractId" class="form-control">
+                                    @foreach (var contract in ViewBag.Contracts)
+                                    {
+                                        <option value="@contract.Value">@contract.Text</option>
+                                    }
+                                </select>
                             </div>
 
                             <div class="mt-4 mb-0">

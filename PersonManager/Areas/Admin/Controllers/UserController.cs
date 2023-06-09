@@ -117,7 +117,7 @@ namespace PersonManager.Areas.Admin.Controllers
                 Id = user.id,
                 Username = user.username,
                 Password = user.password,
-                RoleId = (int)user.role_id
+                RoleId = user.role_id
             };
             ViewBag.Roles = db.roles.Select(r => new SelectListItem
             {
@@ -160,7 +160,6 @@ namespace PersonManager.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost]
         public ActionResult Delete(int id)
         {
             var userToDelete = db.users.Find(id);
