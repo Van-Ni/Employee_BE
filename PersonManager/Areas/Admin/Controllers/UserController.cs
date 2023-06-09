@@ -19,6 +19,11 @@ namespace PersonManager.Areas.Admin.Controllers
         {
             var users = db.users.Select(u => new UserViewModel { Id = u.id, Username = u.username, Password = u.password, RoleId = u.role_id }).ToList();
 
+            ViewBag.Roles = db.roles.Select(r => new SelectListItem
+            {
+                Value = r.id.ToString(),
+                Text = r.name
+            }).ToList();
             return View(users);
         }
         public ActionResult Create(int id) //CreateUserByEmployee_id

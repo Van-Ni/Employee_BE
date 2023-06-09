@@ -10,9 +10,6 @@
         <i class="fas fa-table me-1"></i>
         Danh sách tài khoản
     </div>
-    <button type="button" class="btn btn-primary" style=" width: 100px; margin: 16px;">
-        @Html.ActionLink("Tạo mới", "Create", null, new { @style = "color: #fff;" })
-    </button>
     <div class="card-body">
         <table id="datatablesSimple">
             <thead>
@@ -34,21 +31,28 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Username)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Password)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RoleId)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    @foreach (var role in ViewBag.Roles)
+                    {
+                        if (@role.Value == @item.RoleId.ToString())
+                        {
+                            <td>
+                                @role.Text
+                            </td>
+                        }
+                    }
+
+                    <td>
+                        @Html.ActionLink("Cập nhật", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

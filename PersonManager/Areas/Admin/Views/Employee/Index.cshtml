@@ -44,14 +44,27 @@
                 <tr>
                     <td>@emp.Id</td>
                     <td>@emp.Fullname</td>
-                    <td>@emp.Gender</td>
+                    @if (@emp.Gender == true)
+                    {
+                        <td>
+                            Nam
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Nữ
+                        </td>
+                    }
                     <td>@emp.DepartmentName</td>
                     <td>@emp.PositionName</td>
                     <td>@emp.ContractName</td>
                     <td>@emp.UserName</td>
-                    @if (@emp.Status == true) {
-                         <td>Còn làm</td>
-                    } else
+                    @if (@emp.Status == true)
+                    {
+                        <td>Còn làm</td>
+                    }
+                    else
                     {
                         <td>Nghỉ việc</td>
                     }
@@ -59,7 +72,7 @@
                         @Html.ActionLink("Cập nhật", "Edit", new { id = emp.Id }) |
                         @Html.ActionLink("Chi tiết", "GetEmployee", new { id = emp.Id }) |
                         @Html.ActionLink("Xóa", "DeleteEmployee", new { id = emp.Id }) |
-                        @Html.ActionLink("Thêm tài khoản", "Create","User", new {id = emp.Id}, null)
+                        @Html.ActionLink("Thêm tài khoản", "Create", "User", new { id = emp.Id }, null)
                     </td>
                 </tr>
                 }

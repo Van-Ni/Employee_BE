@@ -38,9 +38,18 @@
                 Chấp thuận
             </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Approved)
-            </dd>
+            @if (Model.Approved == true)
+            {
+                <dd>
+                    Có
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    Không
+                </dd>
+            }
 
             <dt>
                 Loại nghỉ phép
