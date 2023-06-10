@@ -29,6 +29,15 @@
                                 <label for="Password">Mật khẩu</label>
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
+                            <div class="mb-3">
+                                <label for="rold_id">Vai trò</label>
+                                <select id="rold_id" name="RoleId" class="form-control">
+                                    @foreach (var role in ViewBag.Roles)
+                                    {
+                                        <option value="@role.Value">@role.Text</option>
+                                    }
+                                </select>
+                            </div>
                             <div class="mt-4 mb-0">
                                 <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Xác nhận"></div>
                             </div>

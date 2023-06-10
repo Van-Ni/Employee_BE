@@ -24,9 +24,13 @@
                                 @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
                             </div>
                             <div class="mb-3">
-                                <label for="gender">Giới tính</label>
-                                @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                                <div class="mb-3">
+                                    <label for="gender">Giới tính</label>
+                                    <select id="gender" name="Gender" class="form-control">
+                                        <option value="true">Nam</option>
+                                        <option value="false">Nữ</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-floating mb-3">
                                 @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày sinh" } })
@@ -63,8 +67,8 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="department_id">Bộ phận</label>
-                                <select id="department_id" name="DepartmentId" class="form-control">
+                                <label for="DepartmentId">Bộ phận</label>
+                                <select id="DepartmentId" name="department_id" class="form-control">
                                     @foreach (var department in ViewBag.Departments)
                                     {
                                         <option value="@department.Value">@department.Text</option>
@@ -72,8 +76,8 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="position_id">Chức vụ</label>
-                                <select id="position_id" name="PositionId" class="form-control">
+                                <label for="PositionId">Chức vụ</label>
+                                <select id="PositionId" name="position_id" class="form-control">
                                     @foreach (var position in ViewBag.Positions)
                                     {
                                         <option value="@position.Value">@position.Text</option>
@@ -81,8 +85,8 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="contract_id">Hợp đồng</label>
-                                <select id="contract_id" name="ContractId" class="form-control">
+                                <label for="ContractId">Hợp đồng</label>
+                                <select id="ContractId" name="contract_id" class="form-control">
                                     @foreach (var contract in ViewBag.Contracts)
                                     {
                                         <option value="@contract.Value">@contract.Text</option>

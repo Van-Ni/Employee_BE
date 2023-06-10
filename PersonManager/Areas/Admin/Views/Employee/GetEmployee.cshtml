@@ -27,9 +27,19 @@
             <dt>
                 Giới tính
             </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
+
+            @if (Model.Gender == true)
+            {
+                <dd>
+                    Nam
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    Nữ
+                </dd>
+            }
 
             <dt>
                 Email
@@ -69,11 +79,12 @@
             <dt>
                 Trạng thái
             </dt>
-            
+
             @if (Model.Status == true)
             {
                 <dd>Còn làm</dd>
-            } else
+            }
+            else
             {
                 <dd>Nghỉ việc</dd>
             }
