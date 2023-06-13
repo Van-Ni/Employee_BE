@@ -26,4 +26,10 @@ namespace PersonManager.Areas.Admin.Models
         public int? UserId { get; set; }
         public string UserName { get; set; }
     }
+    public class EmployeeTest
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
 }

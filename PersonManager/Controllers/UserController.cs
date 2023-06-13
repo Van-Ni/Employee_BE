@@ -1,4 +1,5 @@
-﻿using PersonManager.Models;
+﻿using Microsoft.Ajax.Utilities;
+using PersonManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -26,7 +27,6 @@ namespace PersonManager.Controllers
         [Route("api/User/CreateUserForEmployee", Name = "CreateUserForEmployee")]
         public IHttpActionResult CreateUserForEmployee(int employee_id, user user)
         {
-
             var employee = db.employees.Find(employee_id);
             if (employee == null)
             {
@@ -85,13 +85,19 @@ namespace PersonManager.Controllers
         [Route("api/User/Login")]
         public IHttpActionResult Login(user loginUser)
         {
-            var user = db.users.Include("role").FirstOrDefault(u => u.username == loginUser.username && u.password == loginUser.password);
+            var user = db.users
+                .Include("role")
+                .FirstOrDefault(u => u.username == loginUser.username && u.password == loginUser.password);
+            var employee = db.employees.FirstOrDefault(e => e.user_id == user.id);
             if (user == null)
             {
                 return BadRequest("Tên đăng nhập hoặc mật khẩu không đúng.");
             }
 
-            return Ok(new { id = user.id, username = user.username, role_id = user.role_id, role_name = user.role.name });
+            return Ok(new { id = user.id, username = user.username, role_id = user.role_id,
+                role_name = user.role.name,
+                employee_id = employee.id
+            });
         }
 
         [HttpDelete]

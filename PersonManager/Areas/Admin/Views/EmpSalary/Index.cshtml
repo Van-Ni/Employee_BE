@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PersonManager.Areas.Admin.Models.EmployeeTest>
+<form action="/Admin/EmpSalary/Index" method="get">
+    <label for="month">Month:</label>
+    <input type="number" id="month" name="month" />
+
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year" />
+
+    <input type="submit" value="Submit" />
+</form>
+<p>Month: @ViewBag.Month</p>
+<p>Year: @ViewBag.Year</p>
+
+@using (Html.BeginForm("Submit", "EmpSalary", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <th></th>
+            <th>Name</th>
+        </tr>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="id" value="@employee.Id" />
+                </td>
+                <td>@employee.Name</td>
+            </tr>
+        }
+    </table>
+
+    <input type="hidden" name="month" value="@ViewBag.Month" />
+    <input type="hidden" name="year" value="@ViewBag.Year" />
+
+    <input type="submit" value="Submit" />
+}

@@ -139,6 +139,7 @@
     <Compile Include="Areas\Admin\Controllers\ContractController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmpSalaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HolidayController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LeaveController.cs" />
@@ -363,6 +364,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\EmpSalary\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

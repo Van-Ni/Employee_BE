@@ -69,7 +69,8 @@ namespace PersonManager.Controllers
                     ContractId = e.contract_Id,
                     ContractName = e.contract != null ? e.contract.type : null,
                     UserId = e.user_id,
-                    UserName = e.user != null ? e.user.username : null
+                    UserName = e.user != null ? e.user.username : null,
+                    UserRole = e.user != null && e.user.role != null ? e.user.role.name : null
                 })
                 .SingleOrDefault();
             if (emp == null)
