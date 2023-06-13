@@ -1,36 +1,74 @@
 ﻿@model IEnumerable<PersonManager.Areas.Admin.Models.EmployeeTest>
-<form action="/Admin/EmpSalary/Index" method="get">
-    <label for="month">Month:</label>
+<form action="/Admin/EmpSalary/Index" method="get" style="padding: 16px;">
+    <p>Thời gian thanh toán lương:</p>
+    <label for="month">Tháng:</label>
     <input type="number" id="month" name="month" />
 
-    <label for="year">Year:</label>
+    <label for="year">Năm:</label>
     <input type="number" id="year" name="year" />
 
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Xác nhận" class="btn btn-primary" />
 </form>
-<p>Month: @ViewBag.Month</p>
-<p>Year: @ViewBag.Year</p>
+<p style="padding: 0 16px;">Tháng: @ViewBag.Month</p>
+<p style="padding: 0 16px;">Năm: @ViewBag.Year</p>
 
 @using (Html.BeginForm("Submit", "EmpSalary", FormMethod.Post))
 {
-    <table>
-        <tr>
-            <th></th>
-            <th>Name</th>
-        </tr>
-        @foreach (var employee in Model)
-        {
-            <tr>
-                <td>
-                    <input type="checkbox" name="id" value="@employee.Id" />
-                </td>
-                <td>@employee.Name</td>
-            </tr>
-        }
-    </table>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Danh sách
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
 
-    <input type="hidden" name="month" value="@ViewBag.Month" />
-    <input type="hidden" name="year" value="@ViewBag.Year" />
+                        <th>Tên nhân viên</th>
+                        <th data-sortable="false">
+                            <input type="checkbox" class="check" id="checkAll">
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Tên nhân viên</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+                    <tr>
 
-    <input type="submit" value="Submit" />
+                        <td>
+                            <label for="@employee.Id" style="width: 100%;">@employee.Name</label>
+                        </td>
+                        <td>
+                            <input id="@employee.Id" class="check" type="checkbox" name="id" value="@employee.Id" />
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <input type="hidden" name="month" value="@ViewBag.Month" />
+            <input type="hidden" name="year" value="@ViewBag.Year" />
+
+            <input type="submit" value="Tính lương" class="btn btn-primary" style="color: #fff; width: 100px" />
+        </div>
+    </div>
+    
 }
+
+
+
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.2.js"></script>
+<script>
+    window.jQuery || document.write('<script src="~/Scripts/jquery-1.10.2.js"><\/script>');
+</script>
+<script>
+    $("#checkAll").click(function () {
+        $(".check").prop('checked', $(this).prop('checked'));
+    });
+
+</script>
