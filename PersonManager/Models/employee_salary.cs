@@ -9,6 +9,7 @@
 
 namespace PersonManager.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -23,7 +24,7 @@ namespace PersonManager.Models
         public Nullable<int> totalOverTimeHours { get; set; }
         public Nullable<decimal> totalSalary { get; set; }
         public Nullable<int> employee_id { get; set; }
-    
+        [JsonIgnore]
         public virtual employee employee { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace PersonManager.Controllers
             {
                 return BadRequest("Cannot check in after 10am.");
             }
-            if (now > TimeSpan.FromHours(6.5))
+            if (now > TimeSpan.FromHours(8.5))
             {
                 // Thêm bản ghi vào rewardDiscipline
                 var reward = new rewardDiscipline
@@ -65,7 +65,7 @@ namespace PersonManager.Controllers
                 date = DateTime.Today,
                 check_in_time = now,
                 employee_id = id,
-                status = now <= TimeSpan.FromHours(8.5) ? 0 : 1
+                status = now < TimeSpan.FromHours(8.5) ? 0 : 1
             };
 
             db.attendances.Add(attendance);
@@ -101,7 +101,7 @@ namespace PersonManager.Controllers
                     attendance.overtime_hours = 2;
                     attendance.check_out_time = now;
                 }
-                else if (now > TimeSpan.FromHours(17))
+                else if (now > TimeSpan.FromHours(17.5))
                 {
                     attendance.check_out_time = now;
                 }
