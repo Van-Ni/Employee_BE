@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PersonManager.Areas.Admin.Models.EmployeeTest>
+﻿@model IEnumerable<PersonManager.Areas.Admin.Models.EmployeeSalaryCalculator>
 <form action="/Admin/EmpSalary/Index" method="get">
     <label for="month">Month:</label>
     <input type="number" id="month" name="month" />
@@ -24,7 +24,10 @@
                 <td>
                     <input type="checkbox" name="id" value="@employee.Id" />
                 </td>
-                <td>@employee.Name</td>
+                <td>@employee.Id - @employee.EmployeeName</td>
+                <td>@employee.Month</td>
+                <td>@employee.Year</td>
+                <td>@employee.TotalSalary</td>
             </tr>
         }
     </table>
