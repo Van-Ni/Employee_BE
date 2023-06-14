@@ -14,16 +14,39 @@ namespace PersonManager.Areas.Admin.Controllers
         private HRMEntities db = new HRMEntities();
 
         [HttpGet]
-        public ActionResult Index(int? month, int? year)
+        public ActionResult Index(int? month = 0, int? year = 0)
         {
-            // Danh sách nhân viên
-            List<EmployeeTest> employees = new List<EmployeeTest>
+            if (month == 0 || year == 0)
             {
-             new EmployeeTest { Id = 13, Name = "vanni" },
-             new EmployeeTest { Id = 12, Name = "quoc an" }
-            };
+                var currentDate = DateTime.Now;
+                month = currentDate.Month;
+                year = currentDate.Year;
+            }
+            // Danh sách nhân viên
+            var employees = db.employees
+             .GroupJoin(
+                 db.employee_salary.Where(es => es.month == month && es.year == year),
+                 emp => emp.id,
+                 sal => sal.employee_id,
+                 (emp, sal) => new { Employee = emp, Salaries = sal.DefaultIfEmpty() }
+             )
+             .SelectMany(
+                 x => x.Salaries,
+                 (emp, sal) => new EmployeeSalaryCalculator
+                 {
+                     Id = emp.Employee.id,
+                     EmployeeName = emp.Employee.fullname,
+                     Month = sal != null ? sal.month ?? 0 : 0,
+                     Year = sal != null ? sal.year ?? 0 : 0,
+                     TotalWorkDays = sal != null ? sal.totalWorkDays ?? 0 : 0,
+                     TotalHolidayDays = sal != null ? sal.totalHolidayDays ?? 0 : 0,
+                     TotalPaidLeaveDays = sal != null ? sal.totalPaidLeaveDays ?? 0 : 0,
+                     TotalOverTimeHours = sal != null ? sal.totalOverTimeHours ?? 0 : 0,
+                     TotalSalary = sal != null ? sal.totalSalary ?? 0 : 0
+                 }
+             )
+             .ToList();
 
-            ViewBag.Employees = employees;
             ViewBag.Month = month;
             ViewBag.Year = year;
 
@@ -34,7 +57,8 @@ namespace PersonManager.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Submit(int[] id, int month, int year)
         {
-           // return Json(new { id, month, year });
+            // return Json(employees, JsonRequestBehavior.AllowGet);
+            // return Json(new { id, month, year });
             DateTime startDate = new DateTime(year, month, 1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
 
@@ -79,8 +103,9 @@ namespace PersonManager.Areas.Admin.Controllers
 
                 // Lấy thông tin lương của nhân viên
                 var employeeSalary = db.salarys.FirstOrDefault(s => s.employee_id == employeeId);
-                // Lấy danh sách rewardDiscipline của nhân viên
-                var rewardDisciplines = db.rewardDisciplines.Where(rd => rd.employee_id == employeeId).ToList();
+                var rewardDisciplines = db.rewardDisciplines
+                .Where(rd => rd.employee_id == employeeId && rd.transaction_date.Value.Month == month && rd.transaction_date.Value.Year == year)
+                .ToList();
                 if (employeeSalary != null)
                 {
                     decimal basicSalary = employeeSalary.basicSalary ?? 0;
@@ -115,8 +140,7 @@ namespace PersonManager.Areas.Admin.Controllers
                         leaveCount, totalOvertimeHours, monthlySalary);
                 }
             }
-            return Json("ok");
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { month = month, year = year });
         }
 
         // POST: /Payroll/Calculate
@@ -220,7 +244,11 @@ namespace PersonManager.Areas.Admin.Controllers
                 s.employee_id == employeeId && s.month == month && s.year == year);
             if (existingSalary != null)
             {
-                // Các phần mã khác giữ nguyên
+                existingSalary.totalWorkDays = totalWorkDays;
+                existingSalary.totalHolidayDays = totalHolidayDays;
+                existingSalary.totalPaidLeaveDays = totalPaidLeaveDays;
+                existingSalary.totalOverTimeHours = totalOverTimeHours;
+                existingSalary.totalSalary = totalSalary;
             }
 
             db.SaveChanges();
