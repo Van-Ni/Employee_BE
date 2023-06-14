@@ -30,6 +30,7 @@ namespace PersonManager.Areas.Admin.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool CalculatedSalary { get; set; }
     }
 
 }
