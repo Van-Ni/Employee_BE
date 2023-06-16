@@ -18,27 +18,27 @@
                     <div class="card-body">
                         <form>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Employee_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã nhân viên" } })
+                                @Html.EditorFor(model => model.Employee_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã nhân viên", @required = true } })
                                 <label for="Employee_id">Mã nhân viên</label>
                                 @Html.ValidationMessageFor(model => model.Employee_id, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.BasicSalary, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền lương cơ ản" } })
+                                @Html.EditorFor(model => model.BasicSalary, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền lương cơ bản", @required = true } })
                                 <label for="BasicSalary">Lương cơ bản</label>
                                 @Html.ValidationMessageFor(model => model.BasicSalary, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Allowance, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền phụ cấp" } })
+                                @Html.EditorFor(model => model.Allowance, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền phụ cấp", @required = true } })
                                 <label for="Allowance">Phụ cấp</label>
                                 @Html.ValidationMessageFor(model => model.Allowance, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Coefficient, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền hệ số" } })
+                                @Html.EditorFor(model => model.Coefficient, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền hệ số", @required = true } })
                                 <label for="Coefficient">Hệ số</label>
                                 @Html.ValidationMessageFor(model => model.Coefficient, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền tiền theo giờ" } })
+                                @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền tiền theo giờ", @required = true } })
                                 <label for="HourlyRate">Tiền công theo giờ</label>
                                 @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
                             </div>
@@ -52,6 +52,10 @@
         </div>
     </div>
 }
+
+<div class="row">
+    @Html.ActionLink("<Quay lại", "Index", null, new { @style = "color: #fff; width: 100px; margin: 0 14px", @class = "btn btn-primary" })
+</div>
 
 
 
