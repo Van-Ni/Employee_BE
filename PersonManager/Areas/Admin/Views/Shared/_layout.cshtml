@@ -18,7 +18,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/Admin/Home/Index">Quản lý nhân sự</a>
+        <a class="navbar-brand ps-3" href="/Admin/Home/Index">HRM</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -33,10 +33,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Logout", "Home")">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -52,42 +49,85 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Quản lý</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                            Quản lý nhân viên
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/Admin/Employee/Index">Danh sách nhân viên</a>
-                                <a class="nav-link" href="/Admin/Attendance/Index">Danh sách chấm công</a>
-                                <a class="nav-link" href="/Admin/Contract/Index">Danh sách hợp đồng</a>
-                                <a class="nav-link" href="/Admin/Leave/Index">Danh sách nghỉ phép</a>
-                                <a class="nav-link" href="/Admin/RewardDiscipline/Index">Danh sách khen thưởng và kỷ luật</a>
-                                <a class="nav-link" href="/Admin/User/Index">Danh sách tài khoản</a>
-                                <a class="nav-link" href="/Admin/Role/Index">Danh sách vai trò</a>
-                                <a class="nav-link" href="/Admin/Salary/Index">Danh sách lương</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDepartments" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-briefcase"></i></div>
-                            Quản lý phòng ban
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseDepartments" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/Admin/Department/Index">Danh sách bộ phận</a>
-                                <a class="nav-link" href="/Admin/Position/Index">Danh sách chức vụ</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link" href="/Admin/Holiday/Index">
-                            <div class="sb-nav-link-icon"><i class="fa-regular fa-calendar"></i></div>
-                            Danh sách ngày nghỉ
-                        </a>
-                        <a class="nav-link" href="/Admin/EmpSalary/Index">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
-                            Tính lương
-                        </a>
+                        @if (Session["roleid"].ToString() == "3")
+                        {
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                                Quản lý nhân viên
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/Admin/Employee/Index">Danh sách nhân viên</a>
+                                    <a class="nav-link" href="/Admin/Attendance/Index">Danh sách chấm công</a>
+                                    <a class="nav-link" href="/Admin/Contract/Index">Danh sách hợp đồng</a>
+                                    <a class="nav-link" href="/Admin/Leave/Index">Danh sách nghỉ phép</a>
+                                    <a class="nav-link" href="/Admin/RewardDiscipline/Index">Danh sách khen thưởng và kỷ luật</a>
+                                    <a class="nav-link" href="/Admin/User/Index">Danh sách tài khoản</a>
+                                    <a class="nav-link" href="/Admin/Role/Index">Danh sách vai trò</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="/Admin/Holiday/Index">
+                                <div class="sb-nav-link-icon"><i class="fa-regular fa-calendar"></i></div>
+                                Danh sách ngày nghỉ
+                            </a>
+                        }
+                        else if (Session["roleid"].ToString() == "4")
+                        {
+                            <a class="nav-link" href="/Admin/Salary/Index">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                                Danh sách lương
+                            </a>
+                            <a class="nav-link" href="/Admin/EmpSalary/Index">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                                Tính lương
+                            </a>
+                        }
+                        else if (Session["roleid"].ToString() == "1")
+                        {
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                                Quản lý nhân viên
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/Admin/Employee/Index">Danh sách nhân viên</a>
+                                    <a class="nav-link" href="/Admin/Attendance/Index">Danh sách chấm công</a>
+                                    <a class="nav-link" href="/Admin/Contract/Index">Danh sách hợp đồng</a>
+                                    <a class="nav-link" href="/Admin/Leave/Index">Danh sách nghỉ phép</a>
+                                    <a class="nav-link" href="/Admin/RewardDiscipline/Index">Danh sách khen thưởng và kỷ luật</a>
+                                    <a class="nav-link" href="/Admin/User/Index">Danh sách tài khoản</a>
+                                    <a class="nav-link" href="/Admin/Role/Index">Danh sách vai trò</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDepartments" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-briefcase"></i></div>
+                                Quản lý phòng ban
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseDepartments" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/Admin/Department/Index">Danh sách bộ phận</a>
+                                    <a class="nav-link" href="/Admin/Position/Index">Danh sách chức vụ</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="/Admin/Holiday/Index">
+                                <div class="sb-nav-link-icon"><i class="fa-regular fa-calendar"></i></div>
+                                Danh sách ngày nghỉ
+                            </a>
+                            <a class="nav-link" href="/Admin/Salary/Index">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                                Danh sách lương
+                            </a>
+                            <a class="nav-link" href="/Admin/EmpSalary/Index">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                                Tính lương
+                            </a>
+                        }
+
+
+
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -114,20 +154,20 @@
                                 </div>
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <!--<div class="sb-sidenav-menu-heading">Addons</div>
                         <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
+        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+        Charts
+    </a>
+    <a class="nav-link" href="tables.html">
+        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+        Tables
+    </a>-->
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    @Session["username"]
                 </div>
             </nav>
         </div>

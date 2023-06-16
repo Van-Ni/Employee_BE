@@ -30,6 +30,7 @@ namespace PersonManager.Areas.Admin.Controllers
          .ToList();
 
             return View(contracts);
+
         }
 
         // GET: Admin/Contract/Details/5

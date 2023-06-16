@@ -18,17 +18,17 @@
                     <div class="card-body">
                         <form>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền loại hợp đồng" } })
+                                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền loại hợp đồng", @required=true } })
                                 <label for="Type">Loại hợp đồng</label>
                                 @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày bắt đầu" } })
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày bắt đầu", @required = true } })
                                 <label for="StartDate">Ngày bắt đầu</label>
                                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày kết thúc" } })
+                                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày kết thúc", @required = true } })
                                 <label for="EndDate">Ngày kết thúc</label>
                                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                             </div>

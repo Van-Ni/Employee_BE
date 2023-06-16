@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <form>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền họ và tên" } })
+                                @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền họ và tên", @required = true } })
                                 <label for="fullname">Họ và tên</label>
                                 @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
                             </div>
@@ -35,29 +35,29 @@
                                 </select>
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày sinh" } })
+                                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày sinh", @required = true } })
                                 <label for="birthday">Ngày sinh</label>
                                 @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền email" } })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền email", @required = true } })
                                 <label for="email">Email</label>
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền số điện thoại" } })
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền số điện thoại", @required = true } })
                                 <label for="phone">Số điện thoại</label>
                                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền địa chỉ" } })
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền địa chỉ", @required = true } })
                                 <label for="address">Địa chỉ</label>
                                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày vào công ty" } })
+                                @Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày vào công ty", @required = true } })
                                 <label for="joindate">Ngày vào công ty</label>
                                 @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
                             </div>
