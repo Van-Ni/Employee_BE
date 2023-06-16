@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <form>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền tên bộ phận", @required = true } })
                                 <label for="Name">Tên bộ phận</label>
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>

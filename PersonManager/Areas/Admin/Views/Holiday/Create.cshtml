@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <form>
                         <div class="form-floating mb-3">
-                            @Html.EditorFor(model => model.Holiday_date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày nghỉ" } })
+                            @Html.EditorFor(model => model.Holiday_date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày nghỉ", @required = true } })
                             <label for="Holiday_date">Ngày nghỉ</label>
                             @Html.ValidationMessageFor(model => model.Holiday_date, "", new { @class = "text-danger" })
                         </div>
@@ -29,7 +29,7 @@
                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-floating mb-3">
-                            @Html.EditorFor(model => model.Days_off, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền số ngày nghỉ" } })
+                            @Html.EditorFor(model => model.Days_off, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền số ngày nghỉ", @required = true } })
                             <label for="Days_off">Số ngày nghỉ</label>
                             @Html.ValidationMessageFor(model => model.Days_off, "", new { @class = "text-danger" })
                         </div>

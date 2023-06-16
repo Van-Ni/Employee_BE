@@ -18,22 +18,22 @@
                     <div class="card-body">
                         <form>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Employee_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã nhân viên thưởng, phạt" } })
+                                @Html.EditorFor(model => model.Employee_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền mã nhân viên thưởng, phạt", @required = true } })
                                 <label for="Employee_id">Mã nhân viên</label>
                                 @Html.ValidationMessageFor(model => model.Employee_id, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Transaction_date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày thưởng, phạt" } })
+                                @Html.EditorFor(model => model.Transaction_date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền ngày thưởng, phạt", @required = true } })
                                 <label for="Transaction_date">Ngày</label>
                                 @Html.ValidationMessageFor(model => model.Transaction_date, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Reward_amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền số tiền thưởng, phạt" } })
+                                @Html.EditorFor(model => model.Reward_amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền số tiền thưởng, phạt", @required = true } })
                                 <label for="Reward_amount">Số tiền (Thưởng hoặc phạt)</label>
                                 @Html.ValidationMessageFor(model => model.Reward_amount, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-floating mb-3">
-                                @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền nguyên nhân thưởng, phạt" } })
+                                @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @placeholder = "Điền nguyên nhân thưởng, phạt", @required = true } })
                                 <label for="Reason">Nguyên nhân</label>
                                 @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
                             </div>

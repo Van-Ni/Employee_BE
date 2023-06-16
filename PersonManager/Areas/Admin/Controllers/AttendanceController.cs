@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using PersonManager.Areas.Admin.Models;
 using PersonManager.Models;
-
 namespace PersonManager.Areas.Admin.Controllers
 {
     public class AttendanceController : Controller
@@ -124,4 +123,7 @@ namespace PersonManager.Areas.Admin.Controllers
             }
         }
     }
+
+    
+
 }

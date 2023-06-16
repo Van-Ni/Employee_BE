@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<PersonManager.Areas.Admin.Models.EmployeeSalaryCalculator>
-<form action="/Admin/EmpSalary/Index" method="get">
-    <label for="month">Month:</label>
+<form action="/Admin/EmpSalary/Index" method="get" style="padding: 0 16px;">
+    <label for="month">Tháng:</label>
     <input type="number" id="month" name="month" />
 
     <label for="year">Năm:</label>
@@ -13,31 +13,52 @@
 
 @using (Html.BeginForm("Submit", "EmpSalary", FormMethod.Post))
 {
-    <table>
-        <tr>
-            <th></th>
-            <th>Name</th>
-        </tr>
-        @foreach (var employee in Model)
-        {
-            <tr>
-                <td>
-                    <input type="checkbox" name="id" value="@employee.Id" />
-                </td>
-                <td>@employee.Id - @employee.EmployeeName</td>
-                <td>@employee.Month</td>
-                <td>@employee.Year</td>
-                <td>@employee.TotalSalary</td>
-            </tr>
-        }
-    </table>
-
-    <input type="hidden" name="month" value="@ViewBag.Month" />
-    <input type="hidden" name="year" value="@ViewBag.Year" />
-
-            <input type="submit" value="Tính lương" class="btn btn-primary" style="color: #fff; width: 100px" />
-  
-    
+    <div class="card-header" style="padding:16px;">
+        <i class="fas fa-table me-1"></i>
+        Tính lương
+    </div>
+    <div class="card-body" style="padding:16px;">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th data-sortable="false">
+                        <input id="checkAll" type="checkbox" name="checkAll" />
+                    </th>
+                    <th>Họ và tên</th>
+                    <th>Tháng</th>
+                    <th>Năm</th>
+                    <th>Tổng lương</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                    </th>
+                    <th>Họ và tên</th>
+                    <th>Tháng</th>
+                    <th>Năm</th>
+                    <th>Tổng lương</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>
+                            <input class="check" type="checkbox" name="id" value="@employee.Id" />
+                        </td>
+                        <td>@employee.Id - @employee.EmployeeName</td>
+                        <td>@employee.Month</td>
+                        <td>@employee.Year</td>
+                        <td>@employee.TotalSalary</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="hidden" name="month" value="@ViewBag.Month" />
+        <input type="hidden" name="year" value="@ViewBag.Year" />
+        <input type="submit" value="Tính lương" class="btn btn-primary" style="color: #fff; width: 100px" />
+    </div>
 }
 
 
