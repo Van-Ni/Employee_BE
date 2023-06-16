@@ -49,8 +49,12 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Quản lý</div>
-                        @if (Session["roleid"].ToString() == "3")
+                        @if (Session["roleid"] != null && Session["roleid"].ToString() == "3")
                         {
+                            <a class="nav-link" href="/Admin/Attendance/Employee">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-clock"></i></div>
+                                Chấm công
+                            </a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                                 Quản lý nhân viên
@@ -72,8 +76,12 @@
                                 Danh sách ngày nghỉ
                             </a>
                         }
-                        else if (Session["roleid"].ToString() == "4")
+                        else if (Session["roleid"] != null && Session["roleid"].ToString() == "4")
                         {
+                            <a class="nav-link" href="/Admin/Attendance/Employee">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-clock"></i></div>
+                                Chấm công
+                            </a>
                             <a class="nav-link" href="/Admin/Salary/Index">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
                                 Danh sách lương
@@ -83,7 +91,7 @@
                                 Tính lương
                             </a>
                         }
-                        else if (Session["roleid"].ToString() == "1")
+                        else if (Session["roleid"] != null && Session["roleid"].ToString() == "1")
                         {
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
@@ -117,12 +125,19 @@
                                 Danh sách ngày nghỉ
                             </a>
                             <a class="nav-link" href="/Admin/Salary/Index">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
                                 Danh sách lương
                             </a>
                             <a class="nav-link" href="/Admin/EmpSalary/Index">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-sack-dollar"></i></div>
                                 Tính lương
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="/Admin/Attendance/Employee">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-clock"></i></div>
+                                Chấm công
                             </a>
                         }
 

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace PersonManager.Areas.Admin.Controllers
 {
     public class HomeController : Controller
     {
         private HRMEntities db = new HRMEntities();
-
         // GET: Admin/Home
         public ActionResult Index(user userAcc)
         {
@@ -52,7 +52,10 @@ namespace PersonManager.Areas.Admin.Controllers
                 if (data.Count() > 0)
                 {
                     //add session
-                    Session["id"] = data.FirstOrDefault().id;
+                    var userid = Convert.ToInt32(data.FirstOrDefault().id);
+                    var employee = db.employees.Where(e => e.user_id == userid).FirstOrDefault();
+                    Session["id"] = employee.id;
+                    HttpContext.Application["id"] = employee.id;
                     Session["username"] = data.FirstOrDefault().username;
                     Session["roleid"] = data.FirstOrDefault().role_id;
                     return RedirectToAction("Index");

@@ -34,6 +34,8 @@ namespace PersonManager.Areas.Admin.Controllers
         }
         public ActionResult Employee()
         {
+            // Lấy mã nhân viên
+            var id = (int)HttpContext.Application["id"];
             // Lấy tháng và năm hiện tại
             var now = DateTime.Now;
             var month = now.Month;
@@ -41,7 +43,7 @@ namespace PersonManager.Areas.Admin.Controllers
 
             // Lấy danh sách attendance theo tháng và năm hiện tại và employee_id
             var attendances = db.attendances
-                .Where(a => a.date.Value.Month == month && a.date.Value.Year == year && a.employee_id == 2)
+                .Where(a => a.date.Value.Month == month && a.date.Value.Year == year && a.employee_id == id)
                 .Select(e => new AttendanceViewModel
                 {
                     Id = e.id,
@@ -57,8 +59,11 @@ namespace PersonManager.Areas.Admin.Controllers
             return View(attendances);
         }
         [HttpPost]
-        public ActionResult CheckIn(int id)
+        public ActionResult CheckIn()
         {
+            // Lấy mã nhân viên
+            var id = (int)HttpContext.Application["id"];
+
             var employee = db.employees.Find(id);
             if (employee == null)
             {
@@ -79,7 +84,7 @@ namespace PersonManager.Areas.Admin.Controllers
                 };
                 db.rewardDisciplines.Add(reward);
                 db.SaveChanges();
-                return RedirectToAction("CheckIn");
+                return RedirectToAction("Employee");
             }
             var attendance = new attendance
             {
@@ -91,11 +96,13 @@ namespace PersonManager.Areas.Admin.Controllers
 
             db.attendances.Add(attendance);
             db.SaveChanges();
-            return RedirectToAction("CheckIn");
+            return RedirectToAction("Employee");
         }
         [HttpPost]
-        public ActionResult CheckOut(int id)
+        public ActionResult CheckOut()
         {
+            // Lấy mã nhân viên
+            var id = (int)HttpContext.Application["id"];
             // Tìm bản ghi điểm danh của nhân viên với employeeId và ngày hiện tại
             var attendance = db.attendances
                 .Where(a => a.employee_id == id && a.date == DateTime.Today)
@@ -119,9 +126,11 @@ namespace PersonManager.Areas.Admin.Controllers
                     attendance.check_out_time = now;
                 }
                 db.SaveChanges();
-                return RedirectToAction("CheckIn");
+                return RedirectToAction("Employee");
             }
         }
+
+
     }
 
     
