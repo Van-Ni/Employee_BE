@@ -8,28 +8,30 @@
     </div>
     <div style="display: flex; align-items:center; justify-content: space-between;">
         <div style="display: flex;">
+            
             @if (Model.Count() == 0 && DateTime.Now.TimeOfDay <= TimeSpan.FromHours(10))
             {
-                <form action="/Admin/Attendance/CheckIn" method="post">
-                    <input type="submit" value="Check in" style="color: #fff; width: 120px; height:50px; margin: 16px;" id="checkInBtn" class="btn btn-primary" />
-                </form>
+            <form action="/Admin/Attendance/CheckIn" method="post">
+                <input type="submit" value="Check in" style="color: #fff; width: 120px; height:50px; margin: 16px;" id="checkInBtn" class="btn btn-primary" />
+            </form>
             }
             else if (Model.Count() == 1 && DateTime.Now.TimeOfDay <= TimeSpan.FromHours(17))
             {
-                foreach (var item in Model)
-                {
-                    if (item.Check_out_time == null)
-                    {
-                        <form action="/Admin/Attendance/CheckOut" method="post">
-                            <input type="submit" value="Check out" style="color: #fff; width: 120px; height: 50px; margin: 16px;" id="checkOutBtn" class="btn btn-primary" />
-                        </form>
-                    }
-                }
-            } else
+            foreach (var item in Model)
             {
-                <div style="color: red; padding: 16px">
-                    Bạn đã chấm công hoặc đã hết thời gian chấm công
-                </div>
+            if (item.Check_out_time == null)
+            {
+            <form action="/Admin/Attendance/CheckOut" method="post">
+                <input type="submit" value="Check out" style="color: #fff; width: 120px; height: 50px; margin: 16px;" id="checkOutBtn" class="btn btn-primary" />
+            </form>
+            }
+            }
+            }
+            else
+            {
+            <div style="color: red; padding: 16px">
+                Bạn đã chấm công hoặc đã hết thời gian chấm công
+            </div>
             }
 
 
@@ -45,7 +47,7 @@
                         Ngày
                     </th>
                     <th>
-                        Mã nhân viên
+                        Nhân viên
                     </th>
                     <th>
                         Thời gian vào
@@ -67,7 +69,7 @@
                         Ngày
                     </th>
                     <th>
-                        Mã nhân viên
+                        Nhân viên
                     </th>
 
                     <th>
@@ -90,10 +92,13 @@
                     <tr>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.Date)
+                            @{
+                                var date = item.Date.HasValue ? item.Date.Value.ToString("M/d/yyyy") : "";
+                            }
+                            @Html.DisplayFor(modelItem => date)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Employee_id)
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Check_in_time)

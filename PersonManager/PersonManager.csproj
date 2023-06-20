@@ -160,6 +160,7 @@
     <Compile Include="Areas\Admin\Models\Role.cs" />
     <Compile Include="Areas\Admin\Models\Salary.cs" />
     <Compile Include="Areas\Admin\Models\User.cs" />
+    <Compile Include="Areas\Admin\Models\UserLogin.cs" />
     <Compile Include="Areas\Admin\Views\DefaultController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -333,13 +334,6 @@
     <Content Include="Areas\Admin\Views\Position\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Position\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Position\Index.cshtml" />
-    <EntityDeploy Include="Models\HRM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HRM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\HRM.edmx.diagram">
-      <DependentUpon>HRM.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Attendance\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Holiday\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Holiday\Delete.cshtml" />
@@ -366,6 +360,14 @@
     <Content Include="Areas\Admin\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\EmpSalary\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Attendance\Employee.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <EntityDeploy Include="Models\HRM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HRM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\HRM.edmx.diagram">
+      <DependentUpon>HRM.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

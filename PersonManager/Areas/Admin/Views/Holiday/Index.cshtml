@@ -35,7 +35,10 @@
                 {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Holiday_date)
+                        @{
+                            var Holiday_date = item.Holiday_date.HasValue ? item.Holiday_date.Value.ToString("M/d/yyyy") : "";
+                        }
+                        @Html.DisplayFor(modelItem => Holiday_date)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)

@@ -32,7 +32,28 @@ namespace PersonManager.Controllers
 
             return Ok(salary);
         }
+        [HttpGet]
+        [Route("api/GetAllEmployeeSalaries")]
+        public IHttpActionResult GetAllEmployeeSalaries()
+        {
+            var salaries = db.employee_salary
+                .Include("employee")
+                .Select(s => new
+                {
+                    id = s.id,
+                    month = s.month,
+                    year = s.year,
+                    totalWorkDays = s.totalWorkDays,
+                    totalHolidayDays = s.totalHolidayDays,
+                    totalPaidLeaveDays = s.totalPaidLeaveDays,
+                    totalOverTimeHours = s.totalOverTimeHours,
+                    totalSalary = s.totalSalary,
+                    employee_name = s.employee.fullname
+                })
+                .ToList();
 
+            return Ok(salaries);
+        }
         // POST api/payroll
         [HttpPost]
         [Route("api/Payroll/Calculate")]

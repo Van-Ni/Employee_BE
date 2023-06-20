@@ -18,10 +18,11 @@ namespace PersonManager.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var attendances = db.attendances
+                .Include("employee")
          .Select(e => new AttendanceViewModel
          {
              Id = e.id,
-             Employee_id = e.employee_id,
+             EmployeeName = e.employee.fullname,
              Date = e.date,
              Check_in_time = e.check_in_time,
              Check_out_time = e.check_out_time, 
@@ -44,10 +45,12 @@ namespace PersonManager.Areas.Admin.Controllers
             // Lấy danh sách attendance theo tháng và năm hiện tại và employee_id
             var attendances = db.attendances
                 .Where(a => a.date.Value.Month == month && a.date.Value.Year == year && a.employee_id == id)
+                .Include("employee")
                 .Select(e => new AttendanceViewModel
                 {
                     Id = e.id,
-                    Employee_id = e.employee_id,
+                    Employee_id = (int)e.employee_id,
+                    EmployeeName = e.employee.fullname,
                     Date = e.date,
                     Check_in_time = e.check_in_time,
                     Check_out_time = e.check_out_time,
