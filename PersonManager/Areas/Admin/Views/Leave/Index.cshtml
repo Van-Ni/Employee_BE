@@ -63,7 +63,10 @@
                         @Html.DisplayFor(modelItem => item.Employee_id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Leave_date)
+                        @{
+                            var Leave_date = item.Leave_date.HasValue ? item.Leave_date.Value.ToString("M/d/yyyy") : "";
+                        }
+                        @Html.DisplayFor(modelItem => Leave_date)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Reason)

@@ -41,7 +41,7 @@
                         Ngày
                     </th>
                     <th>
-                        Mã nhân viên
+                        Nhân viên
                     </th>
 
                     <th>
@@ -62,12 +62,14 @@
                 @foreach (var item in Model)
                 {
                 <tr>
-
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @{
+                            var date = item.Date.HasValue ? item.Date.Value.ToString("M/d/yyyy") : "";
+                        }
+                        @Html.DisplayFor(modelItem => date)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Employee_id)
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Check_in_time)

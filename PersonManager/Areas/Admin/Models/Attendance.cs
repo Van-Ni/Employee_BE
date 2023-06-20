@@ -8,7 +8,8 @@ namespace PersonManager.Areas.Admin.Models
     public class AttendanceViewModel
     {
         public int Id { get; set; }
-        public int? Employee_id { get; set; }
+        public string EmployeeName { get; set; }
+        public int Employee_id { get; set; }
         public DateTime? Date { get; set; }
         public TimeSpan? Check_in_time { get; set; }
         public TimeSpan? Check_out_time { get; set; }

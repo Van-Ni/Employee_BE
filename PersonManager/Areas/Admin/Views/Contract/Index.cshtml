@@ -37,12 +37,20 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Type)
+
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.StartDate)
+
+                            @{
+                                var date = item.StartDate.HasValue ? item.StartDate.Value.ToString("M/d/yyyy") : "";
+                            }
+                            @Html.DisplayFor(modelItem => date)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EndDate)
+                            @{
+                                var EndDate = item.EndDate.HasValue ? item.EndDate.Value.ToString("M/d/yyyy") : "";
+                            }
+                            @Html.DisplayFor(modelItem => EndDate)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Note)
